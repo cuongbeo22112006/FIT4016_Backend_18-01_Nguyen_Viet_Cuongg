@@ -1,0 +1,62 @@
+@model IEnumerable<SchoolManagement.Models.Student>
+@{
+    Layout = "_Layout";
+    var page = ViewBag.CurrentPage as int? ?? 1;
+    var totalPages = ViewBag.TotalPages as int? ?? 1;
+    var totalCount = ViewBag.TotalCount as int? ?? 0;
+}
+
+<h2>Students</h2>
+
+<p>
+    <a class="btn btn-primary" href="/Students/Create">Create New Student</a>
+</p>
+
+<p>Total students: @totalCount</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Full name</th>
+            <th>Student ID</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>School</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var s in Model)
+        {
+            <tr>
+                <td>@s.Id</td>
+                <td>@s.FullName</td>
+                <td>@s.StudentId</td>
+                <td>@s.Email</td>
+                <td>@s.Phone</td>
+                <td>@s.School?.Name</td>
+                <td>
+                    <a class="btn btn-sm btn-info" href="/Students/Details/@s.Id">Details</a>
+                    <a class="btn btn-sm btn-warning" href="/Students/Edit/@s.Id">Edit</a>
+                    <a class="btn btn-sm btn-danger" href="/Students/Delete/@s.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<nav>
+    <ul class="pagination">
+        <li class="page-item @(page==1? "disabled":"")">
+            <a class="page-link" href="?page=@(page-1)">Previous</a>
+        </li>
+        @for (int i=1;i<=totalPages;i++)
+        {
+            <li class="page-item @(i==page? "active":"")"><a class="page-link" href="?page=@i">@i</a></li>
+        }
+        <li class="page-item @(page==totalPages? "disabled":"")">
+            <a class="page-link" href="?page=@(page+1)">Next</a>
+        </li>
+    </ul>
+</nav>

@@ -1,0 +1,18 @@
+@model SchoolManagement.Models.Student
+@{
+    Layout = "_Layout";
+}
+<h2>Student Details</h2>
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">@Model.FullName</h5>
+        <p class="card-text"><strong>Student ID:</strong> @Model.StudentId</p>
+        <p class="card-text"><strong>Email:</strong> @Model.Email</p>
+        <p class="card-text"><strong>Phone:</strong> @Model.Phone</p>
+        <p class="card-text"><strong>School:</strong> @Model.School?.Name</p>
+        <p class="card-text"><small>Created: @Model.CreatedAt.ToLocalTime()</small></p>
+        <p class="card-text"><small>Updated: @Model.UpdatedAt.ToLocalTime()</small></p>
+        <a class="btn btn-secondary" href="/Students">Back to list</a>
+    </div>
+</div>

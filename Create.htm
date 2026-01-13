@@ -1,0 +1,44 @@
+@model SchoolManagement.Models.Student
+@{
+    Layout = "_Layout";
+}
+<h2>Create Student</h2>
+
+<form asp-action="Create" method="post" class="row g-3">
+    <div class="col-md-6">
+        <label class="form-label">Full name</label>
+        <input class="form-control" name="FullName" value="@Model?.FullName" />
+        <span class="text-danger">@Html.ValidationMessageFor(m => m.FullName)</span>
+    </div>
+    <div class="col-md-6">
+        <label class="form-label">Student ID</label>
+        <input class="form-control" name="StudentId" value="@Model?.StudentId" />
+        <span class="text-danger">@Html.ValidationMessageFor(m => m.StudentId)</span>
+    </div>
+    <div class="col-md-6">
+        <label class="form-label">Email</label>
+        <input class="form-control" name="Email" value="@Model?.Email" />
+        <span class="text-danger">@Html.ValidationMessageFor(m => m.Email)</span>
+    </div>
+    <div class="col-md-6">
+        <label class="form-label">Phone (optional)</label>
+        <input class="form-control" name="Phone" value="@Model?.Phone" />
+        <span class="text-danger">@Html.ValidationMessageFor(m => m.Phone)</span>
+    </div>
+    <div class="col-md-6">
+        <label class="form-label">School</label>
+        <select class="form-select" name="SchoolId">
+            <option value="">-- Select school --</option>
+            @foreach (var s in (SelectList)ViewBag.Schools)
+            {
+                <option value="@s.Value" @(s.Value==Request.Form["SchoolId"]?"selected":"")>@s.Text</option>
+            }
+        </select>
+        <span class="text-danger">@Html.ValidationMessageFor(m => m.SchoolId)</span>
+    </div>
+
+    <div class="col-12">
+        <button class="btn btn-primary" type="submit">Create</button>
+        <a class="btn btn-secondary" href="/Students">Cancel</a>
+    </div>
+</form>

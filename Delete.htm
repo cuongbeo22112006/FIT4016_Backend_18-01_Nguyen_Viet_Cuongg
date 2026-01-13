@@ -1,0 +1,15 @@
+@model SchoolManagement.Models.Student
+@{
+    Layout = "_Layout";
+}
+<h2>Delete Student</h2>
+
+<div class="alert alert-danger">
+    Are you sure you want to delete student "<strong>@Model.FullName</strong>" (StudentId: @Model.StudentId)?
+</div>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" name="Id" value="@Model.Id" />
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a class="btn btn-secondary" href="/Students">Cancel</a>
+</form>
